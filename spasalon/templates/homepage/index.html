@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block add_css_link %}
+  <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+{% endblock add_css_link %}
+
+{% block content %}
+  <div class="all-text">
+    <h1>Lovely</h1>
+    <p class="col-6 mx-auto">
+        Кожа ежедневно подвергается огромным нагрузкам. Больше всего «достается» лицу, 
+        ведь его, в отличие от других частей тела, нельзя защитить одеждой. Поэтому за
+        кожей необходимо ухаживать в любом возрасте. Это позволит сохранить не только
+        ее здоровье, но и эстетичный внешний вид. Если она от природы безупречна, то
+        правильный уход поддержит ее состояние. Качество проблемной кожи можно значительно
+        улучшить, ежедневно заботясь о ней.
+    </p>
+    <blockquote class="blockquote">
+      <p class="mb-4">
+        Человеческое тело — лучшая картина человеческой души.
+      </p>
+      <footer class="blockquote-footer">
+        <cite title="Source Title">
+            Людвиг Витгенштейн
+        </cite>
+      </footer>
+    </blockquote>
+  </div>
+{% endblock content %}

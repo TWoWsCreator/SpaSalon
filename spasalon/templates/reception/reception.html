@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Заявка
+{% endblock %}
+
+{% block content %}
+  <h1>Оставить заявку</h1>
+  {% if messages %}
+    {% for message in messages %}
+      <h4 class="col-6 mx-auto alert alert-success">{{ message }}</h4>
+    {% endfor %}
+  {% endif %}
+  {% include '../includes/base_form.html' %}
+{% endblock %}

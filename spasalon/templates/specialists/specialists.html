@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Спецаилисты
+{% endblock %}
+
+{% load thumbnail %}
+
+{% block content %}
+  <h1>Специалисты</h1>
+  {% for specialist in specialists %}
+    {% if forloop.counter0|divisibleby:3 %}
+      <div class="row">
+    {% if forloop.counter0 >= 3 and forloop.counter0|divisibleby:3 %}
+      </div>
+    {% endif %}
+    {% endif %}
+    <div class='col-4'>
+        <div class="card">
+            {% thumbnail specialist.person_image '700x350' crop='center' as ph %}
+                <img class='img-fluid' src="{{ ph.url }}"
+                        width="{{ ph.width }}"
+                        height="{{ ph.height }}"
+                        alt="картина">
+            {% endthumbnail %}
+            <div class="card-body">
+            <h5 class="card-title">{{ specialist.surname }} {{ specialist.name }}</h5>
+            </div>
+            <div class="card-body">
+            <a href="{% url 'specialists:specialist' specialist.pk %}" class="card-link">Перейти к странице специалиста</a>
+            </div>
+        </div>
+    </div>
+    {% if forloop.last %}
+      </div>
+    {% endif %}
+  {% endfor %}
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Отзывы
+{% endblock title %}
+
+{% block content %}
+    <h1>Отзывы</h1>
+    <a href="{% url 'reviews:add_review' %}" role="button" class="btn btn-primary bi me-2">Добавить отзыв</a>
+    {% for review in reviews %}
+        <div class="card mt-4 mb-2 {% if review.rating == "4" or review.rating == "5" %}
+        bg-success{% elif review.rating == "1" or review.rating == "2" %}bg-danger{% else %}bg-warning{% endif %}">
+            <div class="card-header">
+                {{ review.user }}
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">
+                    {{ review.name }}, Оценка: {{ review.rating }}
+                </h5>
+                <p class="card-text">
+                    Текст отзыва: {{ review.review_text }}
+                </p>
+                <p class="card-text">
+                    Опубликован: {{ review.created_on }}
+                </p>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock content %}
+

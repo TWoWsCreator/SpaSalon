@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Услуги
+{% endblock title %}
+
+{% load thumbnail %}
+
+{% block content %}
+    <h1>Наши услуги</h1>
+    {% for service in services %}
+        <div class="card bg-dark text-white">
+            <div class="d-block">
+                {% thumbnail service.main_image '700x350' crop='center' as ph %}
+                    <img class='img-fluid' src="{{ ph.url }}"
+                            width="{{ ph.width }}"
+                            height="{{ ph.height }}"
+                            alt="картина">
+                {% endthumbnail %}
+            </div>
+            <div class="card-img-overlay text-black">
+            <h2 class="card-title"><a class='btn btn-dark' href={% url 'services:service' service.pk %}>{{ service.name }}</a></h2>
+            <p class="card-text">Стоимость: {{ service.price }}</p>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock content %}
+

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Специалистам
+{% endblock %}
+
+{% load static %}
+
+{% block content %}
+  <h1>{{ specialist.surname }} {{ specialist.name }}</h1>
+  {% load thumbnail %}
+  <div class="d-block">
+  {% thumbnail specialist.person_image '550x350' as ph %}
+      <img class='img-fluid' src="{{ ph.url }}"
+                 width="{{ ph.width }}"
+                 height="{{ ph.height }}"
+                 alt="картина">
+  {% endthumbnail %}
+  </div>
+  <h4 class="mt-2">О специалисте</h4>
+  <p class="col-6 mx-auto">{{ specialist.description }}</p>
+  <div>
+    <a href="{% url 'specialists:specialists' %}" class="btn btn-primary bi me-2 mb-2" role="button">
+        К специалистам
+    </a>
+  </div>
+{% endblock %}

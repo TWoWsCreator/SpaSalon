@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Услуга
+{% endblock %}
+
+{% load static %}
+
+{% block content %}
+  <h1>{{ service.name }}</h1>
+  <h5>Стоимость: {{ service.price }}</h5>
+  {% load thumbnail %}
+  <div class="d-block">
+  {% thumbnail service.main_image '550x350' as ph %}
+      <img class='img-fluid' src="{{ ph.url }}"
+                 width="{{ ph.width }}"
+                 height="{{ ph.height }}"
+                 alt="картина">
+  {% endthumbnail %}
+  </div>
+  {% if service.images %}
+    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        {% for service_image in service.images.all %}
+          <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="{{ forloop.counter0 }}" class="active" aria-label="Slide forloop.counter" aria-current="true"></button>
+        {% endfor %}
+      </div>
+      <div class="carousel-inner">
+        {% for service_image in service.images.all %}
+          <div class="carousel-item{% if forloop.first %} active{% endif %} text-center">
+            <img src="{{ service_image.get_image.url }}" />
+          </div>
+        {% endfor %}
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  {% endif %}
+  <h4 class="mt-2">Об услуге</h4>
+  <p class="col-6 mx-auto">{{ service.description }}</p>
+  <div>
+    <a href="{% url 'services:services' %}" class="btn btn-primary bi me-2 mb-2" role="button">
+        К каталогу услуг
+    </a>
+  </div>
+{% endblock %}
